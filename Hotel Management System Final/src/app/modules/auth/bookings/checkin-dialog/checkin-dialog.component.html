@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Check In Form</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="checkInForm">
+        <div class="row text-center">
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput readonly readonly formControlName="firstName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput readonly formControlName="middleName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput readonly formControlName="lastName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Room Type</mat-label>
+                    <input matInput readonly formControlName="roomtype">
+                </mat-form-field>
+            </div>
+
+            <div class="col-auto">
+                <mat-form-field appearance="outline">
+                    <mat-label>Check In and Out Dates</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate readonly placeholder="Start date" formControlName="checkIn_date">
+                        <input matEndDate readonly placeholder="End date" formControlName="checkout_date">
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Room No</mat-label>
+                    <input matInput type="number" formControlName="room_no">
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Extra Bed</mat-label>
+                    <input matInput type="number" formControlName="bed">
+                    <mat-hint style="color: red;">Extra bed cost 500 Rs</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div align="center" mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="checkInForm.invalid"
+        [mat-dialog-close]="checkInForm.getRawValue()" cdkFocusInitial> Submit </button>
+</div>

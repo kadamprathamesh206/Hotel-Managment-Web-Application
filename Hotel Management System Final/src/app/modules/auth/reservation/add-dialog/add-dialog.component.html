@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>Booking {{ data.title }} room - ({{ data.priceText }})</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="addForm">
+        <div class="row text-center">
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput formControlName="middleName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName">
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="addForm.get('email')?.touched && addForm.get('email')?.hasError('pattern')">
+                        Email must be of valid format i.e username@domain.xx
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Aadhaar</mat-label>
+                    <input matInput type="number" formControlName="aadhar">
+                    <mat-hint>Aadhaar must be of 12 digits</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="col-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Contact</mat-label>
+                    <input matInput formControlName="contactNo">
+                </mat-form-field>
+            </div>
+
+            <div class="col-auto">
+                <mat-form-field appearance="outline">
+                    <mat-label>Check In and Out Dates</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" formControlName="checkIn_date">
+                        <input matEndDate placeholder="End date" formControlName="checkout_date">
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput formControlName="address"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div align="center" mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="addForm.invalid" [mat-dialog-close]="addForm.getRawValue()" cdkFocusInitial> Submit </button>
+</div>

@@ -1,0 +1,70 @@
+<div class="row justify-content-center custom-bg main-body">
+    <div class="col-10 mt-3">
+
+        <div class="card">
+            <div class="row mt-2">
+                <div class="col-12 offset-1">
+                    <mat-radio-group aria-label="Select an option" [value]="type" (change)="onTypeChange($event)">
+                        <mat-radio-button value="pending">Pending</mat-radio-button> &nbsp;&nbsp;
+                        <mat-radio-button value="checkin">Check In</mat-radio-button> &nbsp;&nbsp;
+                        <mat-radio-button value="checkout">Check Out</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered mt-2">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Contact No</th>
+                            <th>Aadhaar</th>
+                            <th>Email</th>
+                            <th>Reserved Date</th>
+                            <th>Day</th>
+                            <th>Status</th>
+                            <th *ngIf="type == 'checkout'">Bill</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="reservationList.length > 0; else noData">
+                        <tr *ngFor="let data of reservationList">
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.firstName }} {{ data.middleName }} {{ data.lastName }}</td>
+                            <td>{{ data.address }}</td>
+                            <td>{{ data.contactNo }}</td>
+                            <td>{{ data.aadhar }}</td>
+                            <td>{{ data.email }}</td>
+                            <td>{{ data.date }}</td>
+                            <td>{{ data.date }}</td>
+                            <td>{{ data.status }}</td>
+                            <td *ngIf="type == 'checkout'">{{ data.bill }} Rs</td>
+                            <td>
+                                <button type="button" *ngIf="type == 'pending'" class="btn btn-sm btn-success"
+                                    (click)="checkIn(data.id)">
+                                    Check In
+                                </button>
+                                <button type="button" *ngIf="type == 'checkin'" class="btn btn-sm btn-warning"
+                                    (click)="checkOut(data)">
+                                    Check Out
+                                </button>
+                                <p *ngIf="type == 'checkout'" style="color: rgb(26, 194, 26);">Paid</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<ng-template #noData>
+    <tbody class="text-center">
+        <tr>
+            <td colspan="10"> No Data Found</td>
+        </tr>
+    </tbody>
+</ng-template>

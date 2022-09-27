@@ -1,0 +1,40 @@
+<div class="main-content">
+
+    <div class="header">
+        <div class="row">
+            <div class="col">
+                <h1>Hotel Management System</h1>
+            </div>
+
+            <!-- Before Login -->
+            <div class="col-auto clickable" [routerLink]="['/home']" *ngIf="isLoginPage">
+                Home
+            </div>
+            <ng-container *ngIf="isLoginPage">|</ng-container>
+            <div class="col-auto clickable" [routerLink]="['/reservation']" *ngIf="isLoginPage">
+                Book a room
+            </div>
+            <ng-container *ngIf="isLoginPage">|</ng-container>
+            <div class="col-auto clickable" *ngIf="isLoginPage" [routerLink]="['/login']">
+                Admin Login
+            </div>
+
+            <!-- After Login -->
+            <div class="col-auto clickable" [routerLink]="['/bookings']" *ngIf="!isLoginPage">
+                Reservations
+            </div>
+            <ng-container *ngIf="!isLoginPage">|</ng-container>
+            <div class="col-auto clickable" [routerLink]="['/admins']" *ngIf="!isLoginPage">
+                Admins
+            </div>
+            <ng-container *ngIf="!isLoginPage">|</ng-container>
+            <div class="col-auto" *ngIf="!isLoginPage">
+                <mat-icon (click)="logout()" float="right" class="logout-icon" aria-hidden="false" fontIcon="Logout">
+                    power_settings_new</mat-icon>
+            </div>
+        </div>
+
+    </div>
+
+    <router-outlet></router-outlet>
+</div>
